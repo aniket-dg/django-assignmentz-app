@@ -3,7 +3,7 @@ Online Assignment Submission App
 
 ## Screenshots
 
-<img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/login.PNG" width="500" height="300">   <img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/student_login.PNG" width="500" height="300">
+<img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/login.PNG" width="200" height="150">   <img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/student_login.PNG" width="200" height="150">
 <img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/student_dashboard.PNG" >
   <img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/profile.PNG" width="500" height="300">  <img src="https://github.com/aniket-dg/django-assignmentz-app/blob/master/screenshots/assignment_review.PNG" width="500" height="300">
 
