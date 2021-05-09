@@ -1,0 +1,60 @@
+{% extends 'teacher/base.html'%}
+{% block content %}
+     
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+            <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+            <h6 class="d-lg-block d-md-block">Course Code: {{ course.course_code }}</h6>
+
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-1">
+              <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">arrow_back</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+            <div class="col-md-1">
+              <button type="submit" onclick="window.print()" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">picture_as_pdf</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  
+                </div>
+                <div class="card-body">
+                    {% for assignment in assignments %}
+                    <form>
+                    
+                    <h3 style="text-align: center">Assignment No {{ assignment.assignment_no }}: {{ assignment.assignment_name }}</h3>
+                    {% for q in questions %}
+                    <div>
+                        
+                      <input class="form-control" style="margin-top: 20px;" placeholder="Q.{{ forloop.counter }} {{ q }}" disabled>
+                      
+                    </div>
+                    {% endfor %}
+                
+                    <div style="margin-top: 20px; text-align: center;">
+                    <input type="button" onclick="history.back()" class="btn btn-success" value="Back">
+                    </div>
+                  </form>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+    {% endblock %}

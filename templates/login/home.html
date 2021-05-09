@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/logo.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Assignmentz!
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+  <link href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
+
+
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    
+    <div class="main-panel">
+
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8" style=" text-align: center;">
+            <h1 class="d-lg-block d-md-block">Assignmentz</h1>
+            <h6 class="d-lg-block d-md-block">An easy way to submit your Assignment</h6>
+            
+            </div>
+            
+          </div>
+          {% if messages %}
+          <div class="row">
+            <div class="col-md-8">
+              {% for message in messages %}
+              <div class="alert alert-danger text-center">
+                <span>{{ message }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Login</h4>
+                  <p class="card-category">Select your Role</p>
+                </div>
+                <div class="card-body">
+                  <button class="btn btn-warning" onclick="location.href='login/login_student';" style="width: 31%;  padding-top: 34px;">
+                    <i class="material-icons" style="font-size: 50px; margin-left: -14px;">school</i>
+                    <br><br><div style="margin-left: -14px;">Student</div></button>
+
+
+                  <button class="btn btn-warning" onclick="location.href='login/login_teacher';" style="width: 32%; padding-top: 34px;">
+                    <i class="material-icons" style="font-size: 50px;margin-left: -14px;">people_alt</i>
+                    <br><br><div style="margin-left: -14px;">Teacher</div></button>
+
+                    <button class="btn btn-warning" onclick="location.href='/admin';" style="width: 32%; padding-top: 34px;">
+                    <i class="material-icons" style="font-size: 50px;margin-left: -14px;">people_alt</i>
+                    <br><br><div style="margin-left: -14px;">Teacher</div></button>
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+      </div>
+  </div>
+</body>
+
+<footer class="footer">
+  <div class="container-fluid">
+    <nav class="float-left">
+      <ul>
+        <li>
+          <a href="#" style="color: red;">
+            Under Development Phase&nbsp;&nbsp;&nbsp;&nbsp;:)
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+    <div class="copyright float-right">
+      &copy;
+      2021, by
+      <a href="https://github.com/aniket-dg" target="_blank"> aniket.dg</a>
+    </div>
+  </div>
+</footer>
+</html>

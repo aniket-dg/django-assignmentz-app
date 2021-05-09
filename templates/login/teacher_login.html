@@ -1,0 +1,72 @@
+{% extends "login/base.html" %}
+{% block content %}
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-1">
+              <button type="submit" onclick="location.href='/';" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">arrow_back</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+                {{ message }}
+              </div>
+              {% endfor %}
+              {% endif %}
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Teacher Login</h4>
+                  <p class="card-category">Enter Your Credentials</p>
+                </div>
+                <div class="card-body">
+                  <form action="login_teacher" method="post">
+                      {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Email</label>
+                          <input type="text" class="form-control" name="userName">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Password</label>
+                          <input type="password" class="form-control" id="passwordField" name="passWord">
+                          <br>
+                          <p class="card-category"><input type="checkbox" onclick="showPassword()"> &nbsp; Show Password</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary " style="padding: 11px 29px;">Login</button>
+                    
+                    <a href="password-reset" class="btn btn-primary pull-right">Forgot Password?</a> 
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+</div>
+      <script type="text/javascript">
+        function showPassword(){
+          var x = document.getElementById('passwordField');
+              if (x.type === "password"){
+                    x.type = "text";
+                  }
+              else{
+                    x.type = "password";
+                  }
+         }
+      </script>
+{% endblock %}

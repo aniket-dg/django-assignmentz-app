@@ -1,0 +1,73 @@
+{% extends "teacher/base.html" %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+        <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+        <h6 class="d-lg-block d-md-block">Course Code: {{ course.course_code }}</h6>
+
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-md-1">
+            <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+              <i class="material-icons">arrow_back</i>
+              <div class="ripple-container"></div>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Student Roll No
+                    </th>
+                    <th>
+                      Student Name
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                   
+                  </thead>
+                  <tbody>
+                    {% for assignment,student in assignments_with_student %}
+                    {% if not assignment.is_checked %}
+                    <tr>
+                      <td>
+                        {{ student.username }}
+                      </td>
+                      <td>
+                        {{ student.first_name }}
+                      </td>
+                      <td>
+                        <button class="btn btn-primary btn-block" style=" text-align: center;" onclick="location.href='/teacher/course/view-assignment/{{ course.id }}/{{ assignment_Q_id }}/{{ assignment.id }}/assignment-check-view';">Assignment</button>
+                      </td>
+                      
+                     
+                      
+                    </tr>
+                    {% endif %}
+                   {% endfor %}
+                   
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  {% endblock %}

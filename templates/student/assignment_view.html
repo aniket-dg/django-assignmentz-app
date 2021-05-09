@@ -1,0 +1,50 @@
+{% extends 'student/base.html'%}
+{% block content %}
+     
+      <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+                <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+                <h6 class="d-lg-block d-md-block">Course Code: {{ course.course_code }}</h6>
+        
+                </div>
+                
+              </div>         
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  
+                </div>
+                <div class="card-body">
+                    
+                    <form>
+                 
+                     <h3 style="text-align: center">Assignment No {{ assignment_q.assignment_no }}: {{ assignment.assignment_name }}</h3>
+                    
+                    {% for q,a in assignment %} 
+                    <div>
+                       <h5 style="margin-top: 20px;">Q.{{ forloop.counter }} {{ q }}</h5>
+                      <p>Ans:  {{ a }}</p>
+                      
+                    </div>
+                    {% endfor %}
+                
+                    <div style="margin-top: 20px; text-align: center;">
+                    <input type="button" onclick="location.href='/student/course/{{ course.id }}';" class="btn btn-success" value="Back">
+                    
+                    <button class="btn btn-success" onclick="window.print()">Print</button>
+                    </div>
+                  </form>
+                 
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+    {% endblock %}

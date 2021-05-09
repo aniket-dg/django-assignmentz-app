@@ -1,0 +1,81 @@
+{% extends "teacher/base.html" %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+        <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+        <h6 class="d-lg-block d-md-block">Assignment No: {{ assignment.assignment_no }}</h6>
+         <h4 class="d-lg-block d-md-block"> Remaining Student </h4>   
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">arrow_back</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" onclick="window.print()" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">picture_as_pdf</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </div>
+     <div class="row">
+        <div class="col-md-12">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          <div class="card">
+            <div class="card-header card-header-primary">
+              
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      ID
+                    </th>
+                    <th>
+                      Roll No
+                    </th>
+                    <th>
+                      Name
+                    </th>
+                    
+                  </thead>
+                  <tbody>
+                    {% for student in students %}
+                    <tr>
+                      <td>
+                        {{ forloop.counter }}
+                      </td>
+                      <td>
+                        {{ student.username }}
+                      </td>
+                      <td>
+                        {{ student.first_name }}
+                      </td>
+                    </tr>
+                   {% endfor %}
+                   
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  {% endblock %}

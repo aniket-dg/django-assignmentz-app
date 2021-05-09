@@ -1,0 +1,134 @@
+{% extends "student/base.html" %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+        <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+        <h6 class="d-lg-block d-md-block">Course Code: {{ course.course_code }}</h6>
+
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" onclick="location.href='/student/';" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">arrow_back</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        
+        <div class="col-md-12">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          <div class="alert alert-warning" id="custom_warning" style="text-align: center; display: none;">
+            First Submit the Assignment
+            </div>
+          <div class="card">
+            <div class="card-header card-header-primary">
+              
+            </div>
+            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      ID
+                    </th>
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      Last Date to Submit
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Check
+                    </th>
+                    <th>
+                      Marks
+                    </th>
+                    <th>
+                      View
+                    </th>
+                    
+                  </thead>
+                  <tbody>
+                    {% for assignment, submit_status, marks, check in assignment_list %}
+                    <tr>
+                      <td>
+                        {{ assignment.assignment_no }}
+                      </td>
+                      <td>
+                        {{ assignment.assignment_name }}
+                      </td>
+                      <td>
+                        {{ assignment.last_date }}
+                      </td>
+                      <td class="text-primary">
+                        <button class="btn btn-primary btn-block" onclick="location.href='/student/course/{{ course.id }}/{{ assignment.id }}/assignment_view';" style=" text-align: center; width: 80%;">Perform</button>
+                      </td>
+                     <td>
+                     {% if submit_status %}
+                        <div style="color: green; font-size: large;">Submitted</div>
+                       {% endif %}
+                       {% if not submit_status %}
+
+                       <div style="color: red; font-size: large;">Not Submitted yet!</div>
+                       {% endif %}
+                     </td>
+                     <td>
+                      {% if check %}
+                      <div style="color: green; font-size: large;">Check</div>
+                      {% endif %}
+                      {% if not check %}
+                      <div style="color: red; font-size: large;">Uncheck</div>
+                      {% endif %}
+                    </td>
+                     <td>
+                       {{ marks }}
+                     </td>
+                     {% if submit_status %}
+                     <td class="text-primary">
+                      <button class="btn btn-primary btn-block" onclick="location.href='/student/course/{{ course.id }}/{{ assignment.id }}/view/submitted/Assignment';" style=" text-align: center; width: 80%;">View</button>
+                    </td>
+                    {% endif %}
+                    {% if not submit_status %}
+                     <td class="text-primary">
+                     <button class="btn btn-primary btn-block disabled" onclick="call()" style=" text-align: center; width: 80%;">View</button>
+                    </td>
+                    {% endif %}
+                    </tr>
+                   {% endfor %}
+                   
+                   
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <script>
+    function call(){
+      document.getElementById('custom_warning').style.display = "block";
+    }
+  </script>
+  {% endblock %}

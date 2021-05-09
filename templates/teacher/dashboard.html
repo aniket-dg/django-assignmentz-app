@@ -1,0 +1,78 @@
+{% extends 'teacher/base.html'%}
+{% block content %}
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            
+            {% for course in course_list %}
+            <div class="col-lg-3 col-md-6 col-sm-6" onclick="location.href='/teacher/course/{{ course.id }}';" style="cursor: pointer;">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    {{ course.short_name }}
+                  </div>
+                  <p class="card-category">{{ course.name }}</p>
+                  <h3 class="card-title">{{ total }}
+                    <small>Practical</small>
+                  </h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">school</i> {{ user.first_name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+            
+          <div class="col-lg-12 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title">Uploaded Assignment</h4>
+                  <p class="card-category">A Quick view to your lastly uploaded assignment</p>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Submitted Assignment</th>
+                      <th>Checked Assignment</th>
+                      <th>Unchecked Assignment</th>
+                      <th>Remaining Student</th>
+                      
+                    </thead>
+                    <tbody>
+                      {% for assignment, status in assignment_list_with_status %}
+                      
+                      <tr>
+                        <td>{{ assignment.assignment_no }}</td>
+                        <td>{{ assignment.assignment_name }}</td>
+                        
+                        
+                        <td>{{ status.submitted_assignment }}</td>
+                        
+                        <td>{{ status.check_no }}</td>
+                        <td>{{ status.uncheck_no }}</td>
+                        <td>{{ status.remaining_student }}</td>
+                      </tr>
+                     {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>  
+        </div>
+      </div>
+      <script type="text/javascript">
+        function activate() {
+          var element = document.getElementById('dashboard');
+          element.classList.add("active");
+        }
+        activate();
+      </script>
+    {% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'teacher/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+        <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+        <h6 class="d-lg-block d-md-block">Course Code: {{ course.course_code }}</h6>
+
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">arrow_back</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title ">Create Assignment</h4>
+              <p class="card-category"></p>
+            </div>
+
+            <div class="card-body">
+              <form method="POST" action="/teacher/course/create-assignment/{{ course.id }}/assignment-submit">
+                  {% csrf_token %}
+                <div class="table-responsive">
+
+                  <style type="text/css">
+                        .table th{
+                          border-top: 0px;
+
+                        }
+                        .table tbody tr td{
+                          border-top: 0px;
+                          border-bottom: 0px;
+                        }
+                        .table thead th{
+                          border-bottom: 0px;
+                        }
+
+                       
+                  </style>
+                  <table class="table" >
+                     <thead class=" text-primary">
+                    <th style="color: black;">
+                     <b># Please type new queestion on new Line, Press Enter after writing one question</b><br>
+                     <b># Don't give a number to Questions</b>
+                    </th>
+                    
+                  </thead>
+                  <tr><td><input type="text" autocomplete="off" class="form-control" name="name" placeholder="Asssignment Name"></td></tr>  
+                      
+                  <div class="row">
+                    <div class="col-md-6">
+                      <tr><td><input type="number" autocomplete="off" class="form-control col-md-4" name="no" placeholder="Enter Asssignment No"></td></tr>  
+                   
+                    </div>
+                    <div class="col-md-6">
+                      <tr><td><input type="text" autocomplete="off" class="form-control col-md-4" name="last_date" placeholder="Last Date to Submit" onfocus="(this.type = 'date')"></td></tr>  
+                  
+                    </div>
+                  </div>
+                    
+
+            <tr><td style="border-color: red;"><textarea autocomplete="off" placeholder="Sample Question         What is mean by {{ course.name }}?" class="form-control" name="questions" rows="8" ></textarea>
+            </td>
+              </tr>
+            
+                  </table>
+                  
+      </div><br>
+      <div class="text-center">
+               <button type="submit" class="btn btn-primary ">Submit</button>
+              </div>  <div class="clearfix"></div>
+              </form>
+
+         
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ 
+
+
+{% endblock %}
+
+
+
+{% block javascript %}
+<script>
+  autosize(document.querySelectorAll('textarea'));
+</script>
+{% endblock %}

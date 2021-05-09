@@ -1,0 +1,61 @@
+{% extends "student/base.html" %}
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+      
+      <div class="row">
+        <div class="col-md-12" style=" text-align: center; padding: 10px 0px;">
+        <h1 class="d-lg-block d-md-block">{{ course.name }}</h1>
+        <h6 class="d-lg-block d-md-block">{{ course.course_code }}</h6>
+
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">arrow_back</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              
+            </div>
+            <div class="card-body">
+              {% for assignment in assignment %}
+              <form method="POST" action="/student/course/{{ course.id }}/{{ assignment.id}}/submit-assignment">
+                  {% csrf_token %}
+                <h3 style="text-align: center">Assignment No {{ assignment.assignment_no }}: {{ assignment.assignment_name }}</h3>
+                <div>
+                    {% for question in questions %}
+                  <label style="margin-top: 20px;">Q.{{ forloop.counter }}  {{ question }}</label>
+                 <textarea class="form-control" oncut="return false" onpaste="return false" placeholder="Answer......" name="{{ forloop.counter }}"></textarea>
+                    {% endfor %}
+                </div>
+
+                <div style="margin-top: 20px; text-align: center;">
+                <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+                {% endfor %}
+              </form>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block javascript %}
+  
+  <script>
+    autosize(document.querySelectorAll('textarea'));
+  </script>
+
+  {% endblock %}
