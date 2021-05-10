@@ -1,5 +1,5 @@
 # django-assignmentz-app
-Online Assignment Submission App
+Online Assignment Submission App. [Live Preview here](http://assignmentz.pythonanywhere.com/)
 
 ## Screenshots
 
