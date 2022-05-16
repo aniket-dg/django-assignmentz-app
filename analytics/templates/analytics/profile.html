@@ -1,0 +1,52 @@
+{% extends 'analytics/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" onclick="history.back()" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">arrow_back</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-12">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">Edit Profile</h4>
+              <p class="card-category text-warning">Some fields are not change at user level</p>
+            </div>
+            <div class="card-body">
+              <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function activate() {
+      var element = document.getElementById('profile');
+      element.classList.add("active");
+    }
+    activate();
+  </script>
+  {% endblock %}

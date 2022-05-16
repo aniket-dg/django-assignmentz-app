@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from users.models import User
 from django.contrib.auth.decorators import login_required
 from login.views import is_teacher, logout_user, is_student, is_super
 from .models import Teacher, Assignment_Q, Status
@@ -15,7 +15,12 @@ def dashboard(request):
     if is_teacher(request.user.id):
         course_list = getAssignedCourse(request, request.user.id)
         teacher = Teacher.objects.get(teacher_id = request.user.id)
-        assignment_list = Assignment_Q.objects.filter(teacher_id = teacher)
+        assignment_list = []
+        for item in course_list:
+            assignment = Assignment_Q.objects.filter(teacher_id = teacher, course_id=item)
+            assignment_list.append(assignment)
+
+        # assignment_list = Assignment_Q.objects.filter(teacher_id = teacher)
         status = getStatus(request, teacher)
         total = getAssignment(request, teacher)
         assignment_list_with_status = zip(assignment_list, status)
@@ -90,7 +95,7 @@ def getProfile(request):# Profile Details and Updation
         else:
             return render(request, 'teacher/profile.html',{ 'user':user, 'course':course })
     else:
-        logout(request)
+        # logout(request)
         return redirect('home')
     
     

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from users.models import User
 from student.models import Student , Assignment_Ans
 from database.models import Course
 from login.views import change_password, logout_user

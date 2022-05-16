@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError
-from django.contrib import messages  #Message Framework
+from django.contrib import messages  # Message Framework
 from django.contrib.auth.forms import PasswordResetForm
 from assignment.settings import BASE_DIR, EMAIL_HOST_USER, EMAIL_TEMPLATE
 from django.contrib.auth.tokens import default_token_generator
@@ -17,13 +17,14 @@ from os import path
 from teacher.models import Teacher
 from student.models import Student
 
+
 # Create your views here.
 def login_student(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
             userName = request.POST['userName']
             password = request.POST['passWord']
-            user = authenticate(request, username = userName, password = password)
+            user = authenticate(request, email=userName, password=password)
             if user is not None:
                 if is_teacher(user.id):
                     messages.error(request, 'Please select appropriate User Role')
@@ -43,26 +44,29 @@ def login_student(request):
     else:
         return redirect('/student')
 
+
 def is_student(id):
     try:
-        student = Student.objects.get(student_id = id)
+        student = Student.objects.get(student_id=id)
         return True
     except Exception as e:
         return False
 
-def is_teacher(id):# Check User is Teacher or Not
+
+def is_teacher(id):  # Check User is Teacher or Not
     try:
-        teacher = Teacher.objects.get(teacher_id = id)
+        teacher = Teacher.objects.get(teacher_id=id)
         return True
     except Exception as e:
         return False
+
 
 def login_teacher(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            userName = request.POST['userName']
+            email = request.POST['email']
             password = request.POST['passWord']
-            user = authenticate(request, username = userName, password = password)
+            user = authenticate(email=email, password=password)
             if user is not None:
                 if is_teacher(user.id):
                     login(request, user)
@@ -78,15 +82,17 @@ def login_teacher(request):
     else:
         return redirect('/teacher')
 
+
 def is_super(id):
     try:
-        super_user = User.objects.get(id = id)
+        super_user = User.objects.get(id=id)
         if super_user.is_superuser:
             return True
         else:
             return False
     except Exception as e:
         return False
+
 
 def home(request):
     if request.user.is_authenticated:
@@ -99,10 +105,12 @@ def home(request):
                 return redirect('/admin')
     else:
         return render(request, 'login/home.html')
+
+
 @login_required
 def change_password(request):
     if request.method == "POST":
-        user = User.objects.get(id = request.user.id)
+        user = User.objects.get(id=request.user.id)
         user.set_password(request.POST['newPassword'])
         user.save()
         logout(request)
@@ -110,11 +118,13 @@ def change_password(request):
         return redirect('home')
     else:
         return HttpResponse("System Error")
+
+
 @login_required
 def change_password_view(request):
-    return render(request,'login/change_password.html')
-        
+    return render(request, 'login/change_password.html')
+
+
 def logout_user(request):
     logout(request)
     return redirect('home')
-

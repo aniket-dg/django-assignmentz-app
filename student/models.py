@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 from database.models import Course
 from teacher.models import Assignment_Q
 # Create your models here.
 
 class Student(models.Model):
     student_id = models.OneToOneField(User, on_delete= models.CASCADE)
-    registerd_course = models.ManyToManyField(Course)
+    registerd_course = models.ManyToManyField(Course, blank=True)
     def __str__(self):
         return u'%s' %(self.student_id)
     
